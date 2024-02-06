@@ -18,27 +18,27 @@ app.get('/products', async (req, res) => {
 
     res.json({ products: productsToSend });
   } catch (error) {
-    console.error('Error retrieving products:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    console.error('Error al recuperar productos:', error);
+    res.status(500).json({ error: 'Error Interno del Servidor' });
   }
 });
 
 app.get('/products/:id', async (req, res) => {
   try {
-    const productId = req.params.pid;
+    const productId = req.params.id;
     const product = await productManager.getProductById(productId);
 
     if (product) {
       res.json({ product });
     } else {
-      res.status(404).json({ error: 'Product not found' });
+      res.status(404).json({ error: 'Producto no encontrado' });
     }
   } catch (error) {
-    console.error('Error retrieving product:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    console.error('Error al recuperar el producto:', error);
+    res.status(500).json({ error: 'Error Interno del Servidor' });
   }
 });
 
 app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
+  console.log(`Servidor corriendo en: http://localhost:${port}`);
 });
